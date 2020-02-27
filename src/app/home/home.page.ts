@@ -8,21 +8,22 @@ import { NavController } from '@ionic/angular';
 })
 export class HomePage {
 
-  public people: AngularFireList<any>;
+  people$;
 
 constructor(public navCtrl: NavController, public afDatabase: AngularFireDatabase) {
-  this.people = afDatabase.list('/random');
+  this.people$ = afDatabase.list('/random');
+  console.log(this.people$);
 }
 pickEyeColor(eyeColor: string){
-  this.people = this.afDatabase.list('random',
+  this.people$ = this.afDatabase.list('random',
     ref => ref.orderByChild('eyeColor').equalTo(eyeColor));
 }
 pick(eyeColor: string){
-  this.people = this.afDatabase.list('random',
+  this.people$ = this.afDatabase.list('random',
     ref => ref.orderByChild('eyeColor').equalTo(eyeColor));
 }
 pickOlderPeople(age){
-  this.people = this.afDatabase.list('random',
+  this.people$ = this.afDatabase.list('random',
     ref => ref.orderByChild('age').startAt(parseInt(age)));
 }
 }
